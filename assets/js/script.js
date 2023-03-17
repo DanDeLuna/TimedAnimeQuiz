@@ -1,93 +1,52 @@
-//define questions
-const questions = [
-    {
-        question: "Who is the main character in Cowboy Bebop ?",
-        choices: ["a. Goku", "b. Monkey D. Luffy ", "c. Levi Ackerman", "d. Spike Spiegel"],
-        answer: "d. Spike Spiegel"
-    },
-    { 
-        question: "Who is the main character in Naruto ?",
-        choices: ["a. Tanjiro", "b. Gon Freecss", "c. Naruto", "d. Edward Elric"],
-        answer: "c. Naruto"
-    },
-    {
-        question: "Who is the main character in Dragon Ball Z ?",
-        choices: ["a. Levi Ackerman", "b. Goku", "c. Astro Boy", "d. Tanjiro"],
-        answer: "b. Goku"
-    },
-    {
-        question: "Who is the main character in Hunter x Hunter ?",
-        choices: ["a. Astro Boy ", "b. Levi Ackerman", "c. Gon Freecss", "d. Jotaro Kujo"],
-        answer: "c. Gon Freecss"
-    },
-    {
-        question: "Who is the main character in Berserk ?",
-        choices: ["a. Levi Ackerman", "b. Guts", "c. Jotaro Kujo", "d. Roronoa Zoro"],
-        answer: "b. Guts"
-    },
-    {
-        question: "Who is the main character in Demon Slayer?",
-        choices: ["a. Edward Elric", "b. Levi Ackerman", "c. Tanjiro", "d. Astro Boy"],
-        answer: "c. Tanjiro"
-    },
-    {
-        question: "Who is the main character in Death Note ?",
-        choices: ["a. Gon Freecss", "b. L", "c. Edward Elric", "d. Astro Boy"],
-        answer: "b. L"
-    },
-    {
-        question: "Who is the main character in Fullmetal Alchemist ?",
-        choices: ["a. Edward Elric", "b. Tanjiro", "c. Astro Boy", "d. Jotaro Kujo"],
-        answer: "a. Edward Elric"
-    }
-];
 
-//Getting elements by ID
-//Time elements and linking btns
+// grab references to elements
 var timer = document.getElementById("timer");
 var timeLeft = document.getElementById("timeLeft");
 var timesUp = document.getElementById("timesUp");
 
-var startInfo = document.getElementById("startInfo");
-var startQuizButton = document.getElementById("startQuizButton");
+var startDiv = document.getElementById("start");
+var startQuizBtn = document.getElementById("start-quiz-button");
 
-var quizDiv = document.getElementById("quizDiv");
-var questionToAnswer = document.getElementById("questionToAnswer");
-var btnA = document.getElementById("btnA");
-var btnB = document.getElementById("btnB");
-var btnC = document.getElementById("btnC");
-var btnD = document.getElementById("btnD");
-var checkAnswerr = document.getElementById("checkAnswer");
+var questionDiv = document.getElementById("questionDiv");
+var questionTitle = document.getElementById("questionTitle");
+var choiceA = document.getElementById("btn0");
+var choiceB = document.getElementById("btn1");
+var choiceC = document.getElementById("btn2");
+var choiceD = document.getElementById("btn3");
+var answerCheck = document.getElementById("answerCheck");
 
 var summary = document.getElementById("summary");
-var submitBtn = document.getElementById("submitBtn");
+var submitInitialBtn = document.getElementById("submitInitialBtn");
 var initialInput = document.getElementById("initialInput");
 
-var highScoreTrack = document.getElementById("highScoreTrack");
-var scoreFinal = document.getElementById("scoreFinal");
+var highScoreSection = document.getElementById("highScoreSection");
+var finalScore = document.getElementById("finalScore");
 
-var backBtn = document.getElementById("backBtn");
-var clearBtn = document.getElementById("clearBtn"); 
-var viewScore = document.getElementById("viewScore");
-var listOfScore = document.getElementById("listOfScore");
+var goBackBtn = document.getElementById("goBackBtn");
+var clearHighScoreBtn = document.getElementById("clearHighScoreBtn"); 
+var viewHighScore = document.getElementById("viewHighScore");
+var listOfHighScores = document.getElementById("listOfHighScores");
 
-// default variable
-var correctAn = 0;
+// define other variables
+var correctAns = 0;
 var questionNum = 0;
 var scoreResult;
 var questionIndex = 0;
 
+/**
+ * FUNCTIONS
+ */
 
-//Timer
-var totalTime = 161;
+// WHEN I click the start button, timer starts
+var totalTime = 151;
 function newQuiz() {
     questionIndex = 0;
-    totalTime = 160;
+    totalTime = 150;
     timeLeft.textContent = totalTime;
     initialInput.textContent = "";
 
-    startInfo.style.display = "none";
-    quizDiv.style.display = "block";
+    startDiv.style.display = "none";
+    questionDiv.style.display = "block";
     timer.style.display = "block";
     timesUp.style.display = "none";
 
@@ -104,112 +63,124 @@ function newQuiz() {
 
     showQuiz();
 };
-// present  questions and answers
+
+// console.log(questions[questionIndex].question);
+// console.log(questions[questionIndex].choices);
+
+// then presented with questions and choices
 function showQuiz() {
     nextQuestion();
 }
 
 function nextQuestion() {
     questionTitle.textContent = questions[questionIndex].question;
-    btnA.textContent = questions[questionIndex].choices[0];
-    btnB.textContent = questions[questionIndex].choices[1];
-    btnC.textContent = questions[questionIndex].choices[2];
-    btnD.textContent = questions[questionIndex].choices[3];
+    choiceA.textContent = questions[questionIndex].choices[0];
+    choiceB.textContent = questions[questionIndex].choices[1];
+    choiceC.textContent = questions[questionIndex].choices[2];
+    choiceD.textContent = questions[questionIndex].choices[3];
 }
-function checkAnswerr(answer) {
+
+// after question is answered, show if correct or wrong
+function checkAnswer(answer) {
 
     var lineBreak = document.getElementById("lineBreak");
     lineBreak.style.display = "block";
-    checkAnswerr.style.display = "block";
+    answerCheck.style.display = "block";
 
     if (questions[questionIndex].answer === questions[questionIndex].choices[answer]) {
-        // correct answer,plus 1
-        correctAn++;
-
-        checkAnswerr.textContent = "Correct!";
+        // correct answer, add 1 score to final score
+        correctAns++;
+        // console.log(correctAns);
+        answerCheck.textContent = "Correct!";
     } else {
-        // wrong - 10 seconds
+        // wrong answer, deduct 10 second from timer
         totalTime -= 10;
         timeLeft.textContent = totalTime;
-        checkAnswerr.textContent = "Wrong! The correct answer is: " + questions[questionIndex].answer;
+        answerCheck.textContent = "Wrong! The correct answer is: " + questions[questionIndex].answer;
     }
 
     questionIndex++;
-    // go through the rest of the questions  
+    // repeat with the rest of questions 
     if (questionIndex < questions.length) {
         nextQuestion();
     } else {
-        // End game if no more questions 
+        // if no more question, run game over function
         gameOver();
     }
 }
-function chooseA() { checkAnswerr(0); }
 
-function chooseB() { checkAnswerr(1); }
+function chooseA() { checkAnswer(0); }
 
-function chooseC() { checkAnswerr(2); }
+function chooseB() { checkAnswer(1); }
 
-function chooseD() { checkAnswerr(3); }
+function chooseC() { checkAnswer(2); }
+
+function chooseD() { checkAnswer(3); }
+
+// when all questions are answered or timer reaches 0, game over
 function gameOver() {
     summary.style.display = "block";
-    quizDiv.style.display = "none";
-    startInfo.style.display = "none";
+    questionDiv.style.display = "none";
+    startDiv.style.display = "none";
     timer.style.display = "none";
     timesUp.style.display = "block";
 
-    // final score
-    scoreFinal.textContent = correctAn;
+    // show final score
+    finalScore.textContent = correctAns;
 }
+
+// enter initial and store highscore in local storage
 function storeHighScores(event) {
     event.preventDefault();
 
-    // No blank
+    // stop function is initial is blank
     if (initialInput.value === "") {
-        alert("Please enter your Name!");
+        alert("Please enter your initials!");
         return;
     } 
 
-    startInfo.style.display = "none";
+    startDiv.style.display = "none";
     timer.style.display = "none";
     timesUp.style.display = "none";
     summary.style.display = "none";
-    highScoreTrack.style.display = "block";   
+    highScoreSection.style.display = "block";   
 
-    // save to local storage
-    var saveHighScores = localStorage.getItem("high scores");
+    // store scores into local storage
+    var savedHighScores = localStorage.getItem("high scores");
     var scoresArray;
 
-    if (saveHighScores === null) {
+    if (savedHighScores === null) {
         scoresArray = [];
     } else {
-        scoresArray = JSON.parse(saveHighScores)
+        scoresArray = JSON.parse(savedHighScores)
     }
 
-    var userrScore = {
+    var userScore = {
         initials: initialInput.value,
-        score: scoreFinal.textContent
+        score: finalScore.textContent
     };
 
-    console.log(userrScore);
-    scoresArray.push(userrScore);
+    console.log(userScore);
+    scoresArray.push(userScore);
 
-    // store in local
+    // stringify array in order to store in local
     var scoresArrayString = JSON.stringify(scoresArray);
     window.localStorage.setItem("high scores", scoresArrayString);
     
-    // highscores
+    // show current highscores
     showHighScores();
 }
+
 // function to show high scores
 var i = 0;
 function showHighScores() {
 
-    startInfo.style.display = "none";
+    startDiv.style.display = "none";
     timer.style.display = "none";
-    quizDiv.style.display = "none";
+    questionDiv.style.display = "none";
     timesUp.style.display = "none";
     summary.style.display = "none";
-    highScoreTrack.style.display = "block";
+    highScoreSection.style.display = "block";
 
     var savedHighScores = localStorage.getItem("high scores");
 
@@ -219,37 +190,40 @@ function showHighScores() {
     }
     console.log(savedHighScores);
 
-    var storeHighScores = JSON.parse(saveHighScores);
+    var storedHighScores = JSON.parse(savedHighScores);
 
-    for (; i < storeHighScores.length; i++) {
-        var eachNewScore = document.createElement("p");
-        eachNewScore.innerHTML = storeHighScores[i].initials + ": " + storeHighScores[i].score;
-        listOfHighScores.appendChild(eachNewScore);
+    for (; i < storedHighScores.length; i++) {
+        var eachNewHighScore = document.createElement("p");
+        eachNewHighScore.innerHTML = storedHighScores[i].initials + ": " + storedHighScores[i].score;
+        listOfHighScores.appendChild(eachNewHighScore);
     }
 }
 
+/**
+ * ADD EVENT LISTENERS
+ */
 
-startQuizButton.addEventListener("click", newQuiz);
-btnA.addEventListener("click", chooseA);
-btnB.addEventListener("click", chooseB);
-btnC.addEventListener("click", chooseC);
-btnD.addEventListener("click", chooseD);
+startQuizBtn.addEventListener("click",newQuiz);
+choiceA.addEventListener("click", chooseA);
+choiceB.addEventListener("click", chooseB);
+choiceC.addEventListener("click", chooseC);
+choiceD.addEventListener("click", chooseD);
 
-submitBtn.addEventListener("click", function(event){ 
+submitInitialBtn.addEventListener("click", function(event){ 
     storeHighScores(event);
 });
 
-viewScore.addEventListener("click", function(event) { 
+viewHighScore.addEventListener("click", function(event) { 
     showHighScores(event);
 });
 
-backBtn.addEventListener("click", function() {
-    startInfo.style.display = "block";
-    highScoreTrack.style.display = "none";
+goBackBtn.addEventListener("click", function() {
+    startDiv.style.display = "block";
+    highScoreSection.style.display = "none";
 });
 
-clearBtn.addEventListener("click", function(){
+clearHighScoreBtn.addEventListener("click", function(){
     window.localStorage.removeItem("high scores");
-    listOfScore.innerHTML = "High Scores Cleared!";
-    listOfScore.setAttribute("style", "font-family: 'Archivo', sans-serif; font-style: italic;")
+    listOfHighScores.innerHTML = "High Scores Cleared!";
+    listOfHighScores.setAttribute("style", "font-family: 'Archivo', sans-serif; font-style: italic;")
 });
