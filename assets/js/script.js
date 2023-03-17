@@ -53,10 +53,10 @@ var startQuizButton = document.getElementById("startQuizButton");
 
 var quizDiv = document.getElementById("quizDiv");
 var questionToAnswer = document.getElementById("questionToAnswer");
-var choiceA = document.getElementById("btnA");
-var choiceB = document.getElementById("btnB");
-var choiceC = document.getElementById("btnC");
-var choiceD = document.getElementById("btnD");
+var btnA = document.getElementById("btnA");
+var btnB = document.getElementById("btnB");
+var btnC = document.getElementById("btnC");
+var btnD = document.getElementById("btnD");
 var checkAnswer = document.getElementById("checkAnswer");
 
 var summary = document.getElementById("summary");
@@ -86,8 +86,8 @@ function newQuiz() {
     timeLeft.textContent = totalTime;
     initialInput.textContent = "";
 
-    startDiv.style.display = "none";
-    questionDiv.style.display = "block";
+    startInfo.style.display = "none";
+    quizDiv.style.display = "block";
     timer.style.display = "block";
     timesUp.style.display = "none";
 
@@ -104,3 +104,15 @@ function newQuiz() {
 
     showQuiz();
 };
+// present  questions and answers
+function showQuiz() {
+    nextQuestion();
+}
+
+function nextQuestion() {
+    questionTitle.textContent = questions[questionIndex].question;
+    btnA.textContent = questions[questionIndex].choices[0];
+    btnB.textContent = questions[questionIndex].choices[1];
+    btnC.textContent = questions[questionIndex].choices[2];
+    btnD.textContent = questions[questionIndex].choices[3];
+}
