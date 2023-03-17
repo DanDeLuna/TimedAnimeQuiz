@@ -116,7 +116,7 @@ function nextQuestion() {
     btnC.textContent = questions[questionIndex].choices[2];
     btnD.textContent = questions[questionIndex].choices[3];
 }
-function checkAnswer(answer) {
+function checkAnswerr(answer) {
 
     var lineBreak = document.getElementById("lineBreak");
     lineBreak.style.display = "block";
@@ -143,13 +143,13 @@ function checkAnswer(answer) {
         gameOver();
     }
 }
-function chooseA() { checkAnswer(0); }
+function chooseA() { checkAnswerr(0); }
 
-function chooseB() { checkAnswer(1); }
+function chooseB() { checkAnswerr(1); }
 
-function chooseC() { checkAnswer(2); }
+function chooseC() { checkAnswerr(2); }
 
-function chooseD() { checkAnswer(3); }
+function chooseD() { checkAnswerr(3); }
 function gameOver() {
     summary.style.display = "block";
     quizDiv.style.display = "none";
@@ -200,3 +200,56 @@ function storeHighScores(event) {
     // highscores
     showHighScores();
 }
+// function to show high scores
+var i = 0;
+function showHighScores() {
+
+    startInfo.style.display = "none";
+    timer.style.display = "none";
+    quizDiv.style.display = "none";
+    timesUp.style.display = "none";
+    summary.style.display = "none";
+    highScoreTrack.style.display = "block";
+
+    var savedHighScores = localStorage.getItem("high scores");
+
+    // check if there is any in local storage
+    if (savedHighScores === null) {
+        return;
+    }
+    console.log(savedHighScores);
+
+    var storeHighScores = JSON.parse(saveHighScores);
+
+    for (; i < storeHighScores.length; i++) {
+        var eachNewScore = document.createElement("p");
+        eachNewScore.innerHTML = storeHighScores[i].initials + ": " + storeHighScores[i].score;
+        listOfHighScores.appendChild(eachNewScore);
+    }
+}
+
+
+startQuizButton.addEventListener("click", newQuiz);
+btnA.addEventListener("click", chooseA);
+btnB.addEventListener("click", chooseB);
+btnC.addEventListener("click", chooseC);
+btnD.addEventListener("click", chooseD);
+
+submitBtn.addEventListener("click", function(event){ 
+    storeHighScores(event);
+});
+
+viewScore.addEventListener("click", function(event) { 
+    showHighScores(event);
+});
+
+backBtn.addEventListener("click", function() {
+    startInfo.style.display = "block";
+    highScoreTrack.style.display = "none";
+});
+
+clearBtn.addEventListener("click", function(){
+    window.localStorage.removeItem("high scores");
+    listOfScore.innerHTML = "High Scores Cleared!";
+    listOfScore.setAttribute("style", "font-family: 'Archivo', sans-serif; font-style: italic;")
+});
