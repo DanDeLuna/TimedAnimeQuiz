@@ -19,11 +19,33 @@
         <div id="timeUp"  style="display: none;">Time's Up!</div>
         <div class="WholeQuiz">
             <main>
+            <!--Quiz Starts below-->
                 <div id="startInfo" >
                     <h1 >Anime Main Character Quiz</h1>
                     <p >Do you think you know your anime Characters let's see with a quick quiz!! Answer the question wrong and you lose ten seconds!</p>
-                    <button type="button" id="start-quiz-button" class="btn btn-info ml-5 align-center">Start Quiz</button>
+                    <button type="button" id="start-quiz-button">Start Quiz</button>
                 </div>
+                <div id="quizDiv" style="display: none;">
+                    <p id="questionToAnswer" ></p>
+                    <div >
+                        <p><button id="btn0" ></button></p>
+                        <p><button id="btn1" ></button></p>
+                        <p><button id="btn2" ></button></p>
+                        <p><button id="btn3" ></button></p>
+                        <hr id="lineBreak" style="display: none">
+                        <p id="answerCheck" style="display: none;"></p>
+                    </div>
+                  </div>
+                  <div id="summary" style="display: none;">
+                    <div >
+                        <h2 >Your final score is <span id="finalScore"></span> !</h2>
+                        <form>
+                            <p>Enter your initials: <input id="initialInput" type="text">
+                            <button id="submitInitialBtn" >Submit</button>
+                            </p>
+                        </form>
+                    </div>
+                  </div>
             </main>
         </div>
 
