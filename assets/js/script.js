@@ -72,7 +72,7 @@ var viewScore = document.getElementById("viewScore");
 var listOfScore = document.getElementById("listOfScore");
 
 // default variable
-var correctAns = 0;
+var correctAn = 0;
 var questionNum = 0;
 var scoreResult;
 var questionIndex = 0;
@@ -123,23 +123,23 @@ function checkAnswer(answer) {
     checkAnswerr.style.display = "block";
 
     if (questions[questionIndex].answer === questions[questionIndex].choices[answer]) {
-        // correct answer, add 1 score to final score
-        correctAns++;
-        // console.log(correctAns);
+        // correct answer,plus 1
+        correctAn++;
+
         checkAnswerr.textContent = "Correct!";
     } else {
-        // wrong answer, deduct 10 second from timer
+        // wrong - 10 seconds
         totalTime -= 10;
         timeLeft.textContent = totalTime;
         checkAnswerr.textContent = "Wrong! The correct answer is: " + questions[questionIndex].answer;
     }
 
     questionIndex++;
-    // repeat with the rest of questions 
+    // go through the rest of the questions  
     if (questionIndex < questions.length) {
         nextQuestion();
     } else {
-        // if no more question, run game over function
+        // End game if no more questions 
         gameOver();
     }
 }
@@ -150,3 +150,53 @@ function chooseB() { checkAnswer(1); }
 function chooseC() { checkAnswer(2); }
 
 function chooseD() { checkAnswer(3); }
+function gameOver() {
+    summary.style.display = "block";
+    quizDiv.style.display = "none";
+    startInfo.style.display = "none";
+    timer.style.display = "none";
+    timesUp.style.display = "block";
+
+    // final score
+    scoreFinal.textContent = correctAn;
+}
+function storeHighScores(event) {
+    event.preventDefault();
+
+    // No blank
+    if (initialInput.value === "") {
+        alert("Please enter your Name!");
+        return;
+    } 
+
+    startInfo.style.display = "none";
+    timer.style.display = "none";
+    timesUp.style.display = "none";
+    summary.style.display = "none";
+    highScoreTrack.style.display = "block";   
+
+    // save to local storage
+    var saveHighScores = localStorage.getItem("high scores");
+    var scoresArray;
+
+    if (saveHighScores === null) {
+        scoresArray = [];
+    } else {
+        scoresArray = JSON.parse(saveHighScores)
+    }
+
+    var userrScore = {
+        initials: initialInput.value,
+        score: scoreFinal.textContent
+    };
+
+    console.log(userrScore);
+    scoresArray.push(userrScore);
+
+    // store in local
+    var scoresArrayString = JSON.stringify(scoresArray);
+    window.localStorage.setItem("high scores", scoresArrayString);
+    
+    // highscores
+    showHighScores();
+}
