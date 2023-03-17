@@ -5,7 +5,7 @@ const questions = [
         choices: ["a. Goku", "b. Monkey D. Luffy ", "c. Levi Ackerman", "d. Spike Spiegel"],
         answer: "d. Spike Spiegel"
     },
-    {
+    { 
         question: "Who is the main character in Naruto ?",
         choices: ["a. Tanjiro", "b. Gon Freecss", "c. Naruto", "d. Edward Elric"],
         answer: "c. Naruto"
@@ -41,3 +41,66 @@ const questions = [
         answer: "a. Edward Elric"
     }
 ];
+
+//Getting elements by ID
+//Time elements and linking btns
+var timer = document.getElementById("timer");
+var timeLeft = document.getElementById("timeLeft");
+var timesUp = document.getElementById("timesUp");
+
+var startInfo = document.getElementById("startInfo");
+var startQuizButton = document.getElementById("startQuizButton");
+
+var quizDiv = document.getElementById("quizDiv");
+var questionToAnswer = document.getElementById("questionToAnswer");
+var choiceA = document.getElementById("btnA");
+var choiceB = document.getElementById("btnB");
+var choiceC = document.getElementById("btnC");
+var choiceD = document.getElementById("btnD");
+var checkAnswer = document.getElementById("checkAnswer");
+
+var summary = document.getElementById("summary");
+var submitBtn = document.getElementById("submitBtn");
+var initialInput = document.getElementById("initialInput");
+
+var highScoreTrack = document.getElementById("highScoreTrack");
+var scoreFinal = document.getElementById("scoreFinal");
+
+var backBtn = document.getElementById("backBtn");
+var clearBtn = document.getElementById("clearBtn"); 
+var viewScore = document.getElementById("viewScore");
+var listOfScore = document.getElementById("listOfScore");
+
+// default variable
+var correctAns = 0;
+var questionNum = 0;
+var scoreResult;
+var questionIndex = 0;
+
+
+//Timer
+var totalTime = 161;
+function newQuiz() {
+    questionIndex = 0;
+    totalTime = 160;
+    timeLeft.textContent = totalTime;
+    initialInput.textContent = "";
+
+    startDiv.style.display = "none";
+    questionDiv.style.display = "block";
+    timer.style.display = "block";
+    timesUp.style.display = "none";
+
+    var startTimer = setInterval(function() {
+        totalTime--;
+        timeLeft.textContent = totalTime;
+        if(totalTime <= 0) {
+            clearInterval(startTimer);
+            if (questionIndex < questions.length - 1) {
+                gameOver();
+            }
+        }
+    },1000);
+
+    showQuiz();
+};
