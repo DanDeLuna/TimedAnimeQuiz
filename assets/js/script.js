@@ -57,7 +57,7 @@ var btnA = document.getElementById("btnA");
 var btnB = document.getElementById("btnB");
 var btnC = document.getElementById("btnC");
 var btnD = document.getElementById("btnD");
-var checkAnswer = document.getElementById("checkAnswer");
+var checkAnswerr = document.getElementById("checkAnswer");
 
 var summary = document.getElementById("summary");
 var submitBtn = document.getElementById("submitBtn");
@@ -116,3 +116,37 @@ function nextQuestion() {
     btnC.textContent = questions[questionIndex].choices[2];
     btnD.textContent = questions[questionIndex].choices[3];
 }
+function checkAnswer(answer) {
+
+    var lineBreak = document.getElementById("lineBreak");
+    lineBreak.style.display = "block";
+    checkAnswerr.style.display = "block";
+
+    if (questions[questionIndex].answer === questions[questionIndex].choices[answer]) {
+        // correct answer, add 1 score to final score
+        correctAns++;
+        // console.log(correctAns);
+        checkAnswerr.textContent = "Correct!";
+    } else {
+        // wrong answer, deduct 10 second from timer
+        totalTime -= 10;
+        timeLeft.textContent = totalTime;
+        checkAnswerr.textContent = "Wrong! The correct answer is: " + questions[questionIndex].answer;
+    }
+
+    questionIndex++;
+    // repeat with the rest of questions 
+    if (questionIndex < questions.length) {
+        nextQuestion();
+    } else {
+        // if no more question, run game over function
+        gameOver();
+    }
+}
+function chooseA() { checkAnswer(0); }
+
+function chooseB() { checkAnswer(1); }
+
+function chooseC() { checkAnswer(2); }
+
+function chooseD() { checkAnswer(3); }
