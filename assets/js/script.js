@@ -41,7 +41,7 @@ const questions = [
         answer: "a. Edward Elric"
     }
 ];
-// grab references to elements
+// references to elements
 var timer = document.getElementById("timer");
 var timeLeft = document.getElementById("timeLeft");
 var timesUp = document.getElementById("timesUp");
@@ -69,17 +69,13 @@ var clearHighScoreBtn = document.getElementById("clearHighScoreBtn");
 var viewHighScore = document.getElementById("viewHighScore");
 var listOfHighScores = document.getElementById("listOfHighScores");
 
-// define other variables
+//  vars for quiz logic
 var correctAns = 0;
 var questionNum = 0;
 var scoreResult;
 var questionIndex = 0;
 
-/**
- * FUNCTIONS
- */
-
-// WHEN I click the start button, timer starts
+// start button to start timer 
 var totalTime = 151;
 function newQuiz() {
     questionIndex = 0;
@@ -106,10 +102,7 @@ function newQuiz() {
     showQuiz();
 };
 
-// console.log(questions[questionIndex].question);
-// console.log(questions[questionIndex].choices);
-
-// then presented with questions and choices
+// questions with choices
 function showQuiz() {
     nextQuestion();
 }
@@ -122,7 +115,7 @@ function nextQuestion() {
     choiceD.textContent = questions[questionIndex].choices[3];
 }
 
-// after question is answered, show if correct or wrong
+// show correct or wrong
 function checkAnswer(answer) {
 
     var lineBreak = document.getElementById("lineBreak");
@@ -130,23 +123,22 @@ function checkAnswer(answer) {
     answerCheck.style.display = "block";
 
     if (questions[questionIndex].answer === questions[questionIndex].choices[answer]) {
-        // correct answer, add 1 score to final score
+        // correct add 1 score to final score
         correctAns++;
-        // console.log(correctAns);
         answerCheck.textContent = "Correct!";
     } else {
-        // wrong answer, deduct 10 second from timer
+        // wrong take 10 second off
         totalTime -= 10;
         timeLeft.textContent = totalTime;
         answerCheck.textContent = "Wrong! The correct answer is: " + questions[questionIndex].answer;
     }
 
     questionIndex++;
-    // repeat with the rest of questions 
+    // repeat until quiz is over
     if (questionIndex < questions.length) {
         nextQuestion();
     } else {
-        // if no more question, run game over function
+        // if done end game 
         gameOver();
     }
 }
@@ -159,23 +151,20 @@ function chooseC() { checkAnswer(2); }
 
 function chooseD() { checkAnswer(3); }
 
-// when all questions are answered or timer reaches 0, game over
+//game over function
 function gameOver() {
     summary.style.display = "block";
     questionDiv.style.display = "none";
     startDiv.style.display = "none";
     timer.style.display = "none";
     timesUp.style.display = "block";
-
-    // show final score
     finalScore.textContent = correctAns;
 }
-
-// enter initial and store highscore in local storage
+// enter  name and to save highscore 
 function storeHighScores(event) {
     event.preventDefault();
 
-    // stop function is initial is blank
+    // Name can not be blank
     if (initialInput.value === "") {
         alert("Please enter your initials!");
         return;
@@ -186,34 +175,28 @@ function storeHighScores(event) {
     timesUp.style.display = "none";
     summary.style.display = "none";
     highScoreSection.style.display = "block";   
-
-    // store scores into local storage
+    // save scores
     var savedHighScores = localStorage.getItem("high scores");
     var scoresArray;
-
     if (savedHighScores === null) {
         scoresArray = [];
     } else {
         scoresArray = JSON.parse(savedHighScores)
     }
-
     var userScore = {
         initials: initialInput.value,
         score: finalScore.textContent
     };
-
     console.log(userScore);
     scoresArray.push(userScore);
-
-    // stringify array in order to store in local
     var scoresArrayString = JSON.stringify(scoresArray);
     window.localStorage.setItem("high scores", scoresArrayString);
     
-    // show current highscores
+    // show scores
     showHighScores();
 }
 
-// function to show high scores
+// function to show scores
 var i = 0;
 function showHighScores() {
 
@@ -226,7 +209,6 @@ function showHighScores() {
 
     var savedHighScores = localStorage.getItem("high scores");
 
-    // check if there is any in local storage
     if (savedHighScores === null) {
         return;
     }
@@ -241,10 +223,7 @@ function showHighScores() {
     }
 }
 
-/**
- * ADD EVENT LISTENERS
- */
-
+// ADD EVENT LISTENERS for buttons
 startQuizBtn.addEventListener("click",newQuiz);
 choiceA.addEventListener("click", chooseA);
 choiceB.addEventListener("click", chooseB);
