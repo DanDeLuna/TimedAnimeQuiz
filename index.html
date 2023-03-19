@@ -10,27 +10,29 @@
 </head>
 <body>
     <!--Score and timer-->
-    <div class="row">
-        <div >
-            <a href="#" id="viewHighScore">View High Scores</a>
+   <div class="container-fluid">
+
+       <div class="row">
+           <div >
+            <a class ="col text-left" href="#" id="viewHighScore">View High Scores</a>
         </div>
-        <div id="timer" >
-            <i ></i> Time: <span id="timeLeft">0</span>
+        <div class ="text-right" id="timer" >
+          Time: <span id="timeLeft">0</span> 
         </div>
         <div id="timesUp"  style="display: none;">Time's Up!</div>
     </div>
-<div class="container-fluid">
+
     <div  >
           <main >
               <!--start screen  -->
-              <div id="start" >
-                  <h1 >Anime Quiz</h1>
-                  <p >Let's see if you know your anime characters</p>
+              <div  class="text-center" id="start" >
+                  <h1  class="m-2 justify-content-center" >Anime Quiz</h1>
+                  <p  class="m-2 justify-content-center">Let's see if you know your anime characters</p>
                   <button type="button" id="start-quiz-button" class="rounded">Start Quiz</button>
               </div>
 
               <!--quiz div  -->
-              <div id="questionDiv" style="display: none;">
+              <div class="text-center" id="questionDiv" style="display: none;">
                 <p id="questionTitle" ></p>
                 <div class="btns" >
                     <p><button class="rounded" id="btn0" ></button></p>
@@ -45,10 +47,10 @@
               <!-- score div -->
                 <div id="summary" style="display: none;">
                     
-                        <h2 >Your final score is <span id="finalScore"></span> !</h2>
+                        <h2 class="text-center">Your final score is <span id="finalScore"></span> !</h2>
                         <form>
-                            <p>Enter your initials: <input id="initialInput"  type="text">
-                            <button type="submit" id="submitInitialBtn" >Submit</button>
+                            <p class="text-center">Enter your initials: <input id="initialInput"  type="text">
+                            <button class="text-center" type="submit" id="submitInitialBtn" >Submit</button>
                             </p>
                         </form>
                     </div>
@@ -66,6 +68,7 @@
           </main>
     </div>
 </div>
+
     <script src="./assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>

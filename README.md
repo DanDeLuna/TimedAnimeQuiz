@@ -24,7 +24,7 @@ The following Picture demonstrates the Quiz:
 
 
 ## Review
-The coding languages we used are this project are HTML, CSS, and JavaScript
+The coding languages we used are this project are HTML, CSS, Bootstrap and JavaScript
 
 ## Credits 
 I did not setup a time with a tutor this week. 
