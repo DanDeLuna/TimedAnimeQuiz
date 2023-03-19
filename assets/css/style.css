@@ -2,18 +2,49 @@ body {
     background-color: #f2f2f2; 
 }
 
-h1
-{
+h1, 
+h2 {
     color: #313740;
     font-family: 'Montserrat', sans-serif;
 }
 
 a {
-    color: #0037ff;
+    color: #3290A6;
     font-family: 'Archivo', sans-serif;
 }
 
 a:hover {
-    color: #b20101;
+    color: #99B8BF;
     font-family: 'Archivo', sans-serif;
+}
+
+
+
+#finalScore {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+span {
+    font-family: 'Archivo', sans-serif;
+}
+
+p {
+    font-family: 'Archivo', sans-serif;
+}
+
+#questionTitle {
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#answerCheck {
+    font-style: italic;
+    color: #4D5159;
+}
+.container-fluid{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    
 }

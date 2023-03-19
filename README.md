@@ -16,7 +16,12 @@ Not required only need access to the deployed page.
 
 The following Picture demonstrates the Quiz:
 
-(./Assets/04-web-apis-homework-demo.gif)
+![Alt Image text](/assets/images/Screenshot%202023-03-19%20133926.png "Screenshots")
+
+![Alt Image text](/assets/images/Screenshot%202023-03-19%20134002.png "Screenshots")
+
+![Alt Image text](/assets/images/Screenshot%202023-03-19%20134101.png "Screenshots")
+
 
 ## Review
 The coding languages we used are this project are HTML, CSS, and JavaScript
